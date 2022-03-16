@@ -38,6 +38,17 @@ const handleSubmit = async (event) =>{
   }
 };
 
+const handleDelete = async (event,id) =>{
+  event.preventDefault();
+  try {
+   const hi =await axios.delete("http://localhost:8080/api/employees/", +id);
+   console.log(hi); 
+  } catch (error) {
+    console.log(error.response);
+    //toast
+  }
+}
+
 
 
   return ( 
@@ -67,7 +78,7 @@ const handleSubmit = async (event) =>{
 
       <hr/>
 
-    <div className='form-control'>
+    <div className='container'>
       <table className='table table-hover'>
               <thead>
                   <tr>
@@ -87,7 +98,10 @@ const handleSubmit = async (event) =>{
                     <td>{employee.lastName}</td>
                     <td>{employee.emailId}</td>
                     <td>
-                      <button type='' className='btn btn-sm btn-danger'>supprimer</button>
+                      <button type='' onClick={handleDelete} className='btn btn-sm btn-danger'>supprimer</button>&nbsp;
+                      <button type="button" className="btn btn-sm btn-success" data-toggle="modal" data-target="#exampleModal">
+                        Modifier
+                      </button>
                     </td>
                       
                 </tr>)}
